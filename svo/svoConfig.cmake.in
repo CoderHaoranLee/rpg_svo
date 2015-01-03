@@ -1,0 +1,17 @@
+#######################################################
+# Svo source dir
+set( svo_SOURCE_DIR "@CMAKE_CURRENT_SOURCE_DIR@")
+
+#######################################################
+# Svo build dir
+set( svo_DIR "@CMAKE_CURRENT_BINARY_DIR@")
+
+#######################################################
+set( svo_INCLUDE_DIR  "@svo_INCLUDE_DIR@" )
+set( svo_INCLUDE_DIRS "@svo_INCLUDE_DIR@" )
+
+set( svo_LIBRARIES    "@svo_LIBRARIES@" )
+set( svo_LIBRARY      "@svo_LIBRARIES@" )
+
+set( svo_LIBRARY_DIR  "@svo_LIBRARY_DIR@" )
+set( svo_LIBRARY_DIRS "@svo_LIBRARY_DIR@" )

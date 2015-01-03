@@ -3,7 +3,7 @@
 
 SET(TRACE TRUE)
 SET(HAVE_G2O FALSE) 
-SET(USE_ROS TRUE) # Set FALSE if you want to build this package without Catkin
+SET(USE_ROS FALSE) # Set FALSE if you want to build this package without Catkin
 SET(DEBUG_OUTPUT FALSE) # Only relevant if build without ROS
 
 ################################################################################
@@ -124,6 +124,20 @@ ENDIF(HAVE_G2O)
 # Create svo library
 ADD_LIBRARY(svo SHARED ${SOURCEFILES})
 TARGET_LINK_LIBRARIES(svo ${LINK_LIBS})
+
+################################################################################
+# Create the svoConfig.cmake file for other cmake projects.
+GET_TARGET_PROPERTY( FULL_LIBRARY_NAME ${PROJECT_NAME} LOCATION )
+SET(svo_LIBRARIES ${FULL_LIBRARY_NAME} )
+SET(svo_LIBRARY_DIR ${PROJECT_BINARY_DIR} )
+SET(svo_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
+CONFIGURE_FILE( ${CMAKE_CURRENT_SOURCE_DIR}/svoConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/svoConfig.cmake @ONLY IMMEDIATE )
+export( PACKAGE svo )
+
+INSTALL(DIRECTORY include/svo DESTINATION ${CMAKE_INSTALL_PREFIX}/include FILES_MATCHING PATTERN "*.h" )
+INSTALL(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )
+
 
 ################################################################################
 # TESTS

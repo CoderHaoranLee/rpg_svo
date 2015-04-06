@@ -54,10 +54,11 @@ public:
   bool                          is_keyframe_;           //!< Was this frames selected as keyframe?
   g2oFrameSE3*                  v_kf_;                  //!< Temporary pointer to the g2o node object of the keyframe.
   int                           last_published_ts_;     //!< Timestamp of last publishing.
-
+  cv::Mat3b                     img3_;
+  
   Frame(vk::AbstractCamera* cam, const cv::Mat& img, double timestamp);
   ~Frame();
-
+  
   /// Initialize new frame and create image pyramid.
   void initFrame(const cv::Mat& img);
 
@@ -83,6 +84,9 @@ public:
 
   /// Check if a point in (w)orld coordinate frame is visible in the image.
   bool isVisible(const Vector3d& xyz_w) const;
+
+    /// Full resolution image stored in the frame.
+  inline const cv::Mat3b& img3() const { return img3_; }
 
   /// Full resolution image stored in the frame.
   inline const cv::Mat& img() const { return img_pyr_[0]; }
